@@ -1,0 +1,36 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+
+  &__input {
+    width: 250px;
+    height: 30px;
+    padding: 5px;
+
+    font-size: 1.8rem;
+    text-overflow: ellipsis;
+
+    border: 1px solid #989191;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+
+    &:focus:invalid {
+      background-color: #ff343442;
+    }
+    &:focus:valid {
+      background-color: #5dde5d42;
+    }
+
+    &-invalid {
+      border: 1px solid #f57d77e6;
+    }
+
+    &-valid {
+      border: 1px solid #5dde5d42;
+    }
+  }
+}
