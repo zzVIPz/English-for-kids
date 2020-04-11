@@ -40,6 +40,9 @@ module.exports = (env, options) => {
           use: [
             {
               loader: 'file-loader',
+              options: {
+                outputPath: './src/images',
+              },
             },
           ],
         },
@@ -54,6 +57,9 @@ module.exports = (env, options) => {
     },
     plugins: [
       new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+      }),
       new HtmlWebpackPlugin({
         template: 'index.html',
         chunks: ['index'],
@@ -62,10 +68,6 @@ module.exports = (env, options) => {
         filename: 'pages/main.html',
         template: 'src/pages/main.html',
         chunks: ['main'],
-      }),
-      new MiniCssExtractPlugin({
-        filename: 'src/css/[name].css',
-
       }),
     ],
   };

@@ -1,9 +1,10 @@
 
-import Model from './js/main/mainModel';
-import View from './js/main/mainView';
-import Controller from './js/main/mainController';
+import MAIN_MODEL from '../js/main/mainModel';
+import MainView from '../js/main/MainView';
+import MainController from '../js/main/MainController';
 
 window.onload = () => {
-  const main = new Controller(Model, new View());
+  console.log(123);
+  const main = new MainController(MAIN_MODEL, new MainView());
   main.init();
 };

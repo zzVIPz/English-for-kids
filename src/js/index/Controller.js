@@ -11,7 +11,6 @@ class Controller {
     this.input = document.querySelector('.login__input');
     this.link = document.querySelector('.btnflip');
     this.addListener();
-    console.log(1111);
   }
 
   addListener() {
@@ -22,9 +21,11 @@ class Controller {
 
   checkName() {
     if (this.userName) {
-      this.input.value = '';
       const link = `./pages/main.html#${this.userName}`;
       this.getCorrectLink(link);
+
+      //todo: how change value with delay?
+      this.input.value = '';
     } else {
       this.input.classList.add('login__input-invalid');
       this.input.focus();
