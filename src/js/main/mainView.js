@@ -1,7 +1,9 @@
 class MainView {
   constructor() {
-    this.container = document.querySelector('.container');
+    this.cardsContainer = document.querySelector('.container-cards');
+    this.categoriesContainer = document.querySelector('.container-categories');
     this.navigationMenu = document.querySelector('.navigation');
+    this.template = null;
   }
 
   init(model) {
@@ -10,18 +12,33 @@ class MainView {
 
   createNavigationMenu(template, links) {
     links.forEach((link) => {
-      const correctTemplate = this.getCorrectTemplate(template, link);
+      const correctTemplate = this.getCorrectTemplate(template, link, link);
       this.navigationMenu.innerHTML += correctTemplate;
     });
   }
 
-  createCard(template, key) {
-    const correctTemplate = this.getCorrectTemplate(template, key);
-    this.container.innerHTML += correctTemplate;
+  createCategory(template, word, translation) {
+    const correctTemplate = this.getCorrectTemplate(template, word, word, translation);
+    this.categoriesContainer.innerHTML += correctTemplate;
   }
 
-  getCorrectTemplate(template, key) {
-    return template.replace(/\{(.+?)\}/g, key);
+  createCard(template, key) {
+    const correctTemplate = this.getCorrectTemplate(template, key, key);
+    this.cardsContainer.innerHTML += correctTemplate;
+  }
+
+  getCorrectTemplate(template, key, description, text) {
+    this.template = template;
+    if (key) {
+      this.template = this.template.replace(/\{key\}/g, key);
+    }
+    if (description) {
+      this.template = this.template.replace(/\{description\}/g, description.toUpperCase());
+    }
+    if (text) {
+      this.template = this.template.replace(/\{text\}/g, text.toUpperCase());
+    }
+    return this.template;
   }
 }
 

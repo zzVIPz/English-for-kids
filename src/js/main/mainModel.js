@@ -4,15 +4,32 @@ const MAIN_MODEL = {
       <div class="card {key}">
         <div class="card-bg"></div>
         <div class="card-info">
-          <h3 class="card__title">{key}</h3>
+          <h3 class="card__title">{description}</h3>
           <p class="card__description"></p>
         </div>
       </div>
     </div>`,
   linkNavigationTemplate: `
     <li class="navigation__item">
-      <a class="navigation__link" href="#{key}">{key}</a>
+      <a class="navigation__link" href="#{key}">{description}</a>
     </li>`,
+  categoriesTemplate: `
+    <div class="categories__wrapper">
+    <div class="category">
+      <div class="top {key}"></div>
+      <div class="bottom">
+        <p class="category__description">{description}
+          <span class="category__picture"></span>
+        </p>
+      </div>
+    </div>
+    <div class="inside">
+      <div class="icon"></div>
+      <div class="contents">
+        <p class="category__translation">{text}</p>
+      </div>
+    </div>
+  </div>`,
   categories: {
     nature: [
       {

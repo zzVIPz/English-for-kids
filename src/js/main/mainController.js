@@ -9,7 +9,8 @@ class MainController {
     this.navigation = document.querySelector('.navigation');
     this.width = document.body.style.width;
     this.categories = Object.keys(this.model.categories);
-    this.container = document.querySelector('.container');
+    this.container = document.querySelector('.container-cards');
+    this.categoriesContainer = document.querySelector('.container-categories');
     this.toggle = document.querySelector('#toggle');
     this.footer = document.querySelector('.footer');
     this.mode = 0;
@@ -38,19 +39,29 @@ class MainController {
   }
 
   addCardClickHandler() {
+    console.log(this.categories);
     this.container.addEventListener('click', (event) => {
-      if (event.target.closest('.card')) {
+      const card = event.target.closest('.card');
+      if (card) {
         this.categories.forEach((category) => {
-          if (event.target.classList.contains(category)) {
+          if (card.classList.contains(category)) {
+            this.renderSectionOfCategory(category);
           }
         });
       }
     });
   }
 
+  renderSectionOfCategory(category) {
+    this.container.classList.add('container-none');
+    this.categoriesContainer.innerText = '';
+    this.model.categories[category].forEach((item) => {
+      this.view.createCategory(this.model.categoriesTemplate, item.word, item.translation);
+    });
+  }
+
   addCardsActionHandler() {
     this.wrapper = document.querySelectorAll('.card__wrapper');
-
     this.wrapper.forEach((node) => {
       const card = node.querySelector('.card');
       const cardBg = card.querySelector('.card-bg');
