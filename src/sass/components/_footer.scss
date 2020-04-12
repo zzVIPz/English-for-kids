@@ -1,0 +1,20 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+
+  height: 47px;
+
+  background-color: #ff9295;
+
+  &__play {
+    background-color: #6fc57c;
+    .toggle {
+      &:before {
+        color: rgba(62, 160, 81, 0.89);
+      }
+      &:after {
+        color: #ffffff;
+      }
+    }
+  }
+}

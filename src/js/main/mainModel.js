@@ -1,12 +1,18 @@
 const MAIN_MODEL = {
   template: `
-    <div class="card {key}">
-      <div class="card-bg"></div>
-      <div class="card-info">
-        <h3 class="card__title">{key}</h3>
-        <p class="card__description"></p>
+    <div class="card__wrapper">
+      <div class="card {key}">
+        <div class="card-bg"></div>
+        <div class="card-info">
+          <h3 class="card__title">{key}</h3>
+          <p class="card__description"></p>
+        </div>
       </div>
     </div>`,
+  linkNavigationTemplate: `
+    <li class="navigation__item">
+      <a class="navigation__link" href="#{key}">{key}</a>
+    </li>`,
   categories: {
     nature: [
       {
@@ -109,6 +115,12 @@ const MAIN_MODEL = {
         audioSrc: 'audio/swim.mp3',
       },
     ],
+    vika: {},
+    egor: {},
+    sveta: {},
+    r: {},
+    t: {},
+    y: {},
   },
 };
 

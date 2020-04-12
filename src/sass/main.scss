@@ -1,14 +1,18 @@
-@import 'base/normalize';
-@import 'base/base';
+@import "base/normalize";
+@import "base/base";
 
 // Abstract
-@import 'abstract/constants';
-@import 'abstract/mixins';
-@import 'abstract/placeholders';
+@import "abstract/constants";
+@import "abstract/mixins";
+@import "abstract/placeholders";
 
 // //Base
 // @import "base/base";
 
 // //Components
-@import 'components/header';
-@import 'components/card';
+@import "components/header";
+@import "components/card";
+@import "components/burger-menu";
+@import "components/header-navigation";
+@import "components/toggle";
+@import "components/footer";

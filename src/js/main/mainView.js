@@ -1,17 +1,27 @@
 class MainView {
   constructor() {
     this.container = document.querySelector('.container');
+    this.navigationMenu = document.querySelector('.navigation');
   }
 
-  init() {}
+  init(model) {
+    this.createNavigationMenu(model.linkNavigationTemplate, Object.keys(model.categories));
+  }
+
+  createNavigationMenu(template, links) {
+    links.forEach((link) => {
+      const correctTemplate = this.getCorrectTemplate(template, link);
+      this.navigationMenu.innerHTML += correctTemplate;
+    });
+  }
 
   createCard(template, key) {
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('card__wrapper');
-    const correctTemplate = template.replace(/\{(.+?)\}/g, key);
-    console.log(correctTemplate);
-    wrapper.innerHTML = correctTemplate;
-    this.container.append(wrapper);
+    const correctTemplate = this.getCorrectTemplate(template, key);
+    this.container.innerHTML += correctTemplate;
+  }
+
+  getCorrectTemplate(template, key) {
+    return template.replace(/\{(.+?)\}/g, key);
   }
 }
 
