@@ -1,141 +1,245 @@
 const MAIN_MODEL = {
   template: `
+  <a href="#{key}">
     <div class="card__wrapper">
       <div class="card {key}">
         <div class="card-bg"></div>
         <div class="card-info">
           <h3 class="card__title">{description}</h3>
-          <p class="card__description"></p>
+            <p class="card__description"></p>
+          </div>
         </div>
       </div>
-    </div>`,
+    </a>`,
   linkNavigationTemplate: `
     <li class="navigation__item">
-      <a class="navigation__link" href="#{key}">{description}</a>
+      <a class="navigation__link" data-name={key} href="#{key}">{description}</a>
     </li>`,
   categoriesTemplate: `
-    <div class="categories__wrapper">
-    <div class="category">
-      <div class="top {key}"></div>
+    <div class="category-card__wrapper">
+    <div class="category-card">
+      <div class="top {key}">
+        <img src="../src/assets/images/{key}.jpg" alt="{text}">
+      </div>
       <div class="bottom">
-        <p class="category__description">{description}
-          <span class="category__picture"></span>
+        <p class="category-card__description">{description}<span class="category-card__picture"></span>
         </p>
       </div>
     </div>
     <div class="inside">
       <div class="icon"></div>
       <div class="contents">
-        <p class="category__translation">{text}</p>
+        <p class="category-card__translation">{text}</p>
       </div>
     </div>
   </div>`,
   categories: {
-    nature: [
+    action: [
       {
         word: 'cry',
         translation: 'плакать',
-        image: 'img/cry.jpg',
-        audioSrc: 'audio/cry.mp3',
       },
       {
         word: 'dance',
         translation: 'танцевать',
-        image: 'img/dance.jpg',
-        audioSrc: 'audio/dance.mp3',
       },
       {
         word: 'dive',
         translation: 'нырять',
-        image: 'img/dive.jpg',
-        audioSrc: 'audio/dive.mp3',
       },
       {
         word: 'draw',
         translation: 'рисовать',
-        image: 'img/draw.jpg',
-        audioSrc: 'audio/draw.mp3',
       },
       {
         word: 'fish',
         translation: 'ловить рыбу',
-        image: 'img/fish.jpg',
-        audioSrc: 'audio/fish.mp3',
       },
       {
         word: 'fly',
         translation: 'летать',
-        image: 'img/fly.jpg',
-        audioSrc: 'audio/fly.mp3',
       },
       {
         word: 'hug',
         translation: 'обнимать',
-        image: 'img/hug.jpg',
-        audioSrc: 'audio/hug.mp3',
       },
       {
         word: 'jump',
         translation: 'прыгать',
-        image: 'img/jump.jpg',
-        audioSrc: 'audio/jump.mp3',
       },
     ],
 
-    features: [
+    verbs: [
       {
         word: 'open',
         translation: 'открывать',
-        image: 'img/open.jpg',
-        audioSrc: 'audio/open.mp3',
       },
       {
         word: 'play',
         translation: 'играть',
-        image: 'img/play.jpg',
-        audioSrc: 'audio/play.mp3',
       },
       {
         word: 'point',
         translation: 'указывать',
-        image: 'img/point.jpg',
-        audioSrc: 'audio/point.mp3',
       },
       {
         word: 'ride',
         translation: 'ездить',
-        image: 'img/ride.jpg',
-        audioSrc: 'audio/ride.mp3',
       },
       {
         word: 'run',
         translation: 'бегать',
-        image: 'img/run.jpg',
-        audioSrc: 'audio/run.mp3',
       },
       {
         word: 'sing',
         translation: 'петь',
-        image: 'img/sing.jpg',
-        audioSrc: 'audio/sing.mp3',
       },
       {
         word: 'skip',
         translation: 'пропускать, прыгать',
-        image: 'img/skip.jpg',
-        audioSrc: 'audio/skip.mp3',
       },
       {
         word: 'swim',
         translation: 'плавать',
-        image: 'img/swim.jpg',
-        audioSrc: 'audio/swim.mp3',
       },
     ],
-    vika: {},
-    egor: {},
-    sveta: {},
-    r: {},
+    animals: [
+      {
+        word: 'cat',
+        translation: 'кот',
+      },
+      {
+        word: 'chick',
+        translation: 'цыплёнок',
+      },
+      {
+        word: 'chicken',
+        translation: 'курица',
+      },
+      {
+        word: 'dog',
+        translation: 'собака',
+      },
+      {
+        word: 'horse',
+        translation: 'лошадь',
+      },
+      {
+        word: 'pig',
+        translation: 'свинья',
+      },
+      {
+        word: 'rabbit',
+        translation: 'кролик',
+      },
+      {
+        word: 'sheep',
+        translation: 'овца',
+      },
+    ],
+
+    animals2: [
+      {
+        word: 'bird',
+        translation: 'птица',
+      },
+      {
+        word: 'fish',
+        translation: 'рыба',
+      },
+      {
+        word: 'frog',
+        translation: 'жаба',
+      },
+      {
+        word: 'giraffe',
+        translation: 'жирафа',
+      },
+      {
+        word: 'lion',
+        translation: 'лев',
+      },
+      {
+        word: 'mouse',
+        translation: 'мышь',
+      },
+      {
+        word: 'turtle',
+        translation: 'черепаха',
+      },
+      {
+        word: 'dolphin',
+        translation: 'дельфин',
+      },
+    ],
+    clothes: [
+      {
+        word: 'skirt',
+        translation: 'юбка',
+      },
+      {
+        word: 'pants',
+        translation: 'брюки',
+      },
+      {
+        word: 'blouse',
+        translation: 'блузка',
+      },
+      {
+        word: 'dress',
+        translation: 'платье',
+      },
+      {
+        word: 'boot',
+        translation: 'ботинок',
+      },
+      {
+        word: 'shirt',
+        translation: 'рубашка',
+      },
+      {
+        word: 'coat',
+        translation: 'пальто',
+      },
+      {
+        word: 'shoe',
+        translation: 'туфли',
+      },
+    ],
+    emotion: [
+      {
+        word: 'sad',
+        translation: 'грустный',
+      },
+      {
+        word: 'angry',
+        translation: 'сердитый',
+      },
+      {
+        word: 'happy',
+        translation: 'счастливый',
+      },
+      {
+        word: 'tired',
+        translation: 'уставший',
+      },
+      {
+        word: 'surprised',
+        translation: 'удивлённый',
+      },
+      {
+        word: 'scared',
+        translation: 'испуганный',
+      },
+      {
+        word: 'smile',
+        translation: 'улыбка',
+      },
+      {
+        word: 'laugh',
+        translation: 'смех',
+      },
+    ],
     t: {},
     y: {},
   },

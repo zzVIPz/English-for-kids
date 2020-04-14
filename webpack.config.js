@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
@@ -41,7 +42,7 @@ module.exports = (env, options) => {
             {
               loader: 'file-loader',
               options: {
-                outputPath: './src/images',
+                name: '[path][name].[ext]',
               },
             },
           ],
@@ -69,6 +70,7 @@ module.exports = (env, options) => {
         template: 'src/pages/main.html',
         chunks: ['main'],
       }),
+      new CopyPlugin([{ from: 'src/assets/images', to: 'src/assets/images' }]),
     ],
   };
 

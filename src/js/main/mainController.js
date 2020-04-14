@@ -3,6 +3,9 @@ class MainController {
     this.model = model;
     this.view = view;
     this.name = null;
+    this.wrapper = null;
+    this.hash = null;
+    this.links = null;
     this.burgerMenu = document.querySelector('.burger-menu');
     this.header = document.querySelector('.header');
     this.headerNavigation = document.querySelector('.header__navigation');
@@ -17,47 +20,69 @@ class MainController {
   }
 
   init() {
-    this.name = document.location.hash.slice(1);
+    this.setName();
     this.renderTemplate();
     this.addListeners();
   }
 
+  setName() {
+    this.name = localStorage.name || 'English for kids';
+    document.querySelector('.header__title').innerText = this.name;
+  }
+
   renderTemplate() {
+    // if (!document.location.hash.includes(this.name)) {
+    //   this.setLocationHash();
+    // }
     this.view.init(this.model);
+    // console.log(this.navigation.querySelector('[data-name=main-page]'));
+    console.log(this.navigation.querySelector('.navigation__link'));
     this.categories.forEach((key) => {
       this.view.createCard(this.model.template, key);
     });
+    this.links = document.querySelectorAll('.navigation__link');
   }
 
   addListeners() {
     this.addCardsActionHandler();
     this.addBurgerMenuClickHandler();
     this.addOverlayPressHandler();
-    this.addNavigationMenuMouseEnterHandler();
-    this.addCardClickHandler();
+    // this.addNavigationMenuMouseEnterHandler();
+    // this.addCardClickHandler();
     this.addToggleClassHandler();
+    this.addCategoryCardClickHandler();
+    this.addNavigationLinkClickHandler();
+    this.addHashChangeHandler();
   }
 
-  addCardClickHandler() {
-    console.log(this.categories);
-    this.container.addEventListener('click', (event) => {
-      const card = event.target.closest('.card');
-      if (card) {
-        this.categories.forEach((category) => {
-          if (card.classList.contains(category)) {
-            this.renderSectionOfCategory(category);
-          }
-        });
-      }
-    });
-  }
+  // setLocationHash() {
+  //   document.location.hash = `main page%name=${this.name}`;
+  // }
+
+  // addCardClickHandler() {
+  //   this.container.addEventListener('click', (event) => {
+  //     const card = event.target.closest('.card');
+  //     if (card) {
+  //       this.categories.forEach((category) => {
+  //         if (card.classList.contains(category)) {
+  //           this.renderSectionOfCategory(category);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
   renderSectionOfCategory(category) {
-    this.container.classList.add('container-none');
-    this.categoriesContainer.innerText = '';
-    this.model.categories[category].forEach((item) => {
-      this.view.createCategory(this.model.categoriesTemplate, item.word, item.translation);
-    });
+    if (this.categories.includes(category)) {
+      this.container.classList.add('container--hidden');
+      this.categoriesContainer.innerText = '';
+      this.model.categories[category].forEach((item) => {
+        this.view.createCategoryCard(this.model.categoriesTemplate, item.word, item.translation);
+      });
+    } else {
+      this.container.classList.remove('container--hidden');
+      this.categoriesContainer.innerText = '';
+    }
   }
 
   addCardsActionHandler() {
@@ -106,6 +131,7 @@ class MainController {
       //todo: think about overflow hidden
       // document.body.style.width = `${document.body.offsetWidth}px`;
       this.toggleMenuProperty();
+      this.setActiveLink();
     });
   }
 
@@ -144,11 +170,61 @@ class MainController {
     // document.body.style.width = 'auto';
   }
 
+  setActiveLink() {
+    const hash = this.getHashOfPage();
+    let checkState = null;
+    this.links.forEach((link) => {
+      link.classList.remove('navigation__link--active');
+      if (link.dataset.name === hash) {
+        link.classList.add('navigation__link--active');
+        checkState += 1;
+      }
+    });
+    //todo check will there correct state?
+    if (!checkState) {
+      this.links[0].classList.add('navigation__link--active');
+    }
+  }
+
+  getHashOfPage() {
+    this.hash = document.location.hash.slice(1);
+    return this.hash;
+  }
+
   addOverlayPressHandler() {
     this.headerNavigation.addEventListener('click', (event) => {
       if (event.target.classList.contains('header__navigation-active')) this.toggleMenuProperty();
     });
   }
+
+  addNavigationLinkClickHandler() {
+    // this.navigation.addEventListener('click', (event) => {
+    //   const categoryName = event.target.dataset.name;
+    //   if (categoryName) {
+    //     this.renderSectionOfCategory(categoryName);
+    //     this.toggleMenuProperty();
+    //   }
+    // });
+
+    this.navigation.addEventListener('click', (event) => {
+      const categoryName = event.target.dataset.name;
+      if (categoryName) {
+        // this.renderSectionOfCategory(categoryName);
+        this.toggleMenuProperty();
+      }
+    });
+  }
+
+  addHashChangeHandler() {
+    window.addEventListener('hashchange', () => {
+      const hash = this.getHashOfPage();
+      console.log('***', hash);
+
+      this.renderSectionOfCategory(hash);
+    });
+  }
+
+  addCategoryCardClickHandler() {}
 }
 
 export default MainController;

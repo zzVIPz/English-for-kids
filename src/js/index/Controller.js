@@ -15,14 +15,13 @@ class Controller {
 
   addListener() {
     this.link.addEventListener('click', (event) => this.checkName(event));
-
     this.input.addEventListener('input', (event) => this.changeBasicLayout(event));
   }
 
   checkName() {
     if (this.userName) {
-      const link = `./pages/main.html#${this.userName}`;
-      this.getCorrectLink(link);
+      this.setNameToLocalStorage();
+      this.setLink(this.userName);
 
       //todo: how change value with delay?
       this.input.value = '';
@@ -32,8 +31,13 @@ class Controller {
     }
   }
 
-  getCorrectLink(link) {
+  setLink(name) {
+    const link = `./pages/main.html#main page%name=${name}`;
     this.link.setAttribute('href', link);
+  }
+
+  setNameToLocalStorage() {
+    localStorage.name = this.userName;
   }
 
   changeBasicLayout() {

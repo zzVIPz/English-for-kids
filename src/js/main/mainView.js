@@ -11,13 +11,14 @@ class MainView {
   }
 
   createNavigationMenu(template, links) {
+    links.unshift('main page');
     links.forEach((link) => {
       const correctTemplate = this.getCorrectTemplate(template, link, link);
       this.navigationMenu.innerHTML += correctTemplate;
     });
   }
 
-  createCategory(template, word, translation) {
+  createCategoryCard(template, word, translation) {
     const correctTemplate = this.getCorrectTemplate(template, word, word, translation);
     this.categoriesContainer.innerHTML += correctTemplate;
   }
@@ -29,8 +30,9 @@ class MainView {
 
   getCorrectTemplate(template, key, description, text) {
     this.template = template;
+    const trueKey = key.replace(/ /g, '-');
     if (key) {
-      this.template = this.template.replace(/\{key\}/g, key);
+      this.template = this.template.replace(/\{key\}/g, trueKey);
     }
     if (description) {
       this.template = this.template.replace(/\{description\}/g, description.toUpperCase());

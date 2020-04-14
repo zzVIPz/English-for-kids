@@ -33,8 +33,7 @@ h1 {
   align-items: center;
   max-width: 1500px;
   margin: auto;
-}
-
-.container-none {
-  display: none;
+  &--hidden {
+    display: none;
+  }
 }
