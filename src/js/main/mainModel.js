@@ -17,11 +17,12 @@ const MAIN_MODEL = {
     </li>`,
   categoriesTemplate: `
     <div class="category-card__wrapper">
-    <div class="category-card">
-      <div class="top {key}">
+    <div class="category-card" data-name="{key}">
+      <div class="top">
         <img src="../src/assets/images/{key}.jpg" alt="{text}">
       </div>
       <div class="bottom">
+        <div class="category-card__container"></div>
         <p class="category-card__description">{description}<span class="category-card__picture"></span>
         </p>
       </div>
@@ -33,6 +34,8 @@ const MAIN_MODEL = {
       </div>
     </div>
   </div>`,
+  correctTemplate: '<div class="correct"></div>',
+  incorrectTemplate: '<div class="incorrect"></div>',
   categories: {
     action: [
       {

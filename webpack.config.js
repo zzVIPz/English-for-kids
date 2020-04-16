@@ -70,7 +70,10 @@ module.exports = (env, options) => {
         template: 'src/pages/main.html',
         chunks: ['main'],
       }),
-      new CopyPlugin([{ from: 'src/assets/images', to: 'src/assets/images' }]),
+      new CopyPlugin([
+        { from: 'src/assets/images', to: 'src/assets/images' },
+        { from: 'src/assets/media', to: 'src/assets/media' },
+      ]),
     ],
   };
 

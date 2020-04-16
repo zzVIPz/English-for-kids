@@ -1,7 +1,5 @@
 class Controller {
   constructor() {
-    // this.model = model;
-    // this.view = view;
     this.userName = '';
     this.input = null;
     this.link = null;
@@ -23,7 +21,7 @@ class Controller {
       this.setNameToLocalStorage();
       this.setLink(this.userName);
 
-      //todo: how change value with delay?
+      // todo: how change value with delay?
       this.input.value = '';
     } else {
       this.input.classList.add('login__input-invalid');

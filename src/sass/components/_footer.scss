@@ -17,4 +17,28 @@
       }
     }
   }
+
+  .btn-play {
+    position: absolute;
+    top: 4px;
+    left: 68px;
+    z-index: 2;
+
+    display: none;
+    width: 80px;
+    height: 33px;
+
+    font-size: 1.8rem;
+    color: #ffffff;
+
+    background-color: #b0dbb6;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+
+    &--active {
+      display: block;
+    }
+  }
 }

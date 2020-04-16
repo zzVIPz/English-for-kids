@@ -12,6 +12,7 @@
   transform: scale(0.95);
 
   transition: box-shadow 0.5s, transform 0.5s;
+
   &:hover {
     box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
     transform: scale(1);
@@ -24,9 +25,11 @@
     cursor: pointer;
 
     &__description {
+      width: 100%;
       margin-top: 15px;
 
       font-size: 2.5rem;
+      text-align: center;
     }
 
     &__picture {
@@ -54,7 +57,30 @@
 
     .bottom {
       display: flex;
-      justify-content: center;
+      padding: 0 12px;
+    }
+
+    &__container {
+      display: flex;
+    }
+
+    .correct,
+    .incorrect {
+      width: 30px;
+      min-width: 30px;
+      height: 30px;
+      margin-top: 15px;
+      margin-right: 5px;
+
+      background: url("../assets/svg/checkmark.svg") center/30px no-repeat;
+    }
+
+    .incorrect:nth-child(n + 9) {
+      display: none;
+    }
+
+    .incorrect {
+      background: url("../assets/svg/remove.svg") center/30px no-repeat;
     }
   }
 
@@ -73,6 +99,7 @@
     cursor: pointer;
 
     transition: all 0.5s, border-radius 2s, top 1s;
+
     .icon {
       position: absolute;
       top: 85px;
@@ -126,8 +153,21 @@
     }
   }
 
-  .inside-disabled,
-  .category-card__picture--disabled {
+  // .inside-disabled,
+  // .category-card__picture--disabled {
+  //   display: none;
+  // }
+
+  .disabled {
     display: none;
+  }
+}
+
+.inactive {
+  cursor: auto;
+  filter: brightness(0.7);
+  &:hover {
+    box-shadow: none;
+    transform: scale(0.95);
   }
 }
