@@ -20,15 +20,18 @@ class MainController {
     this.mode = 0;
     this.state = 0;
     this.counter = 0;
+    this.audioEffectsList = {};
     this.playlist = null;
     this.keys = null;
     this.key = null;
+    this.mistakes = 0;
   }
 
   init() {
     this.setName();
     this.renderTemplate();
     this.addListeners();
+    this.createAudioEffectsList();
   }
 
   setName() {
@@ -63,22 +66,17 @@ class MainController {
     this.addButtonStartClickHandler();
   }
 
+  createAudioEffectsList() {
+    this.model.audioEffects.forEach((item) => {
+      Object.keys(item).forEach((key) => {
+        this.audioEffectsList[key] = new Audio(`../src/assets/media/${key}.mp3`);
+      });
+    });
+  }
+
   setLocationHash() {
     document.location.hash = `main page%name=${this.name}`;
   }
-
-  // addCardClickHandler() {
-  //   this.container.addEventListener('click', (event) => {
-  //     const card = event.target.closest('.card');
-  //     if (card) {
-  //       this.categories.forEach((category) => {
-  //         if (card.classList.contains(category)) {
-  //           this.renderSectionOfCategory(category);
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
 
   renderSectionOfCategory(category) {
     if (this.categories.includes(category)) {
@@ -291,6 +289,7 @@ class MainController {
       if (card && this.state) {
         const dataName = card.firstElementChild.dataset.name;
         if (dataName === this.key) {
+          this.audioEffectsList.correct.play();
           const container = document.querySelector(
             `[data-name="${this.key}"] .category-card__container`,
           );
@@ -300,19 +299,47 @@ class MainController {
           if (this.counter < this.keys.length) {
             this.playAudioFromPlaylist();
           } else {
+            this.button.classList.remove('btn-play--active');
+            const { mistakes } = this;
+            setTimeout(() => {
+              if (mistakes) {
+                this.audioEffectsList.failure.play();
+              } else {
+                this.audioEffectsList.success.play();
+              }
+              this.showModal(mistakes, this.model.modalWindowTemplate);
+            }, 500);
+            setTimeout(() => {
+              document.querySelector('.modal').remove();
+              document.querySelector('body').classList.remove('overflow-hidden');
+              this.setLocationHash();
+            }, 5000);
+
             this.setDefaultPlayModeState();
-            console.log('finish');
           }
         } else {
-          console.log('***');
+          this.audioEffectsList.error.play();
           const container = document.querySelector(
             `[data-name="${dataName}"] .category-card__container`,
           );
           container.insertAdjacentHTML('afterbegin', this.model.incorrectTemplate);
+          this.mistakes += 1;
         }
       }
     };
     this.categoriesContainer.addEventListener('click', this.checkAnswer);
+  }
+
+  showModal(data, template) {
+    this.view.createModal(data, this.name, template, this.model.phrases);
+    document.querySelector('.modal-container').classList.add('active');
+    document.querySelector('body').classList.add('overflow-hidden');
+    const container = document.querySelector('.modal__context');
+    if (data) {
+      container.classList.add('modal__context--fialure');
+    } else {
+      container.classList.add('modal__context--success');
+    }
   }
 
   setButtonStartGameState() {
@@ -326,7 +353,8 @@ class MainController {
   addButtonStartClickHandler() {
     this.button.addEventListener('click', () => {
       console.log('click', this.playlist);
-      this.button.innerText = 'REPEAT';
+      this.button.innerHTML = this.model.buttonTemplate;
+      this.button.classList.add('btn-play--enabled');
       this.state = 1;
       if (this.playlist) {
         this.playAudioFromPlaylist();
@@ -349,10 +377,12 @@ class MainController {
   setDefaultPlayModeState() {
     this.playlist = null;
     this.button.innerText = 'START';
+    this.button.classList.remove('btn-play--enabled');
     this.keys = null;
     this.key = null;
     this.counter = 0;
     this.state = 0;
+    this.mistakes = 0;
   }
 
   playAudioFromPlaylist() {

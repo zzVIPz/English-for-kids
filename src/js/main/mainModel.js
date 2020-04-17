@@ -1,11 +1,15 @@
 const MAIN_MODEL = {
+  phrases: [
+    'Not bad, <span class="modal-name">{key}</span>! You have only {description}!',
+    'Wow, <span class="modal-name">{key}</span>! You have no mistakes! Good job!',
+  ],
   template: `
-  <a href="#{key}">
-    <div class="card__wrapper">
-      <div class="card {key}">
-        <div class="card-bg"></div>
-        <div class="card-info">
-          <h3 class="card__title">{description}</h3>
+    <a href="#{key}">
+      <div class="card__wrapper">
+        <div class="card {key}">
+          <div class="card-bg"></div>
+          <div class="card-info">
+            <h3 class="card__title">{description}</h3>
             <p class="card__description"></p>
           </div>
         </div>
@@ -29,13 +33,30 @@ const MAIN_MODEL = {
     </div>
     <div class="inside">
       <div class="icon"></div>
-      <div class="contents">
-        <p class="category-card__translation">{text}</p>
-      </div>
-    </div>
-  </div>`,
+        <div class="contents">
+          <p class="category-card__translation">{text}</p>
+        </div>
+     </div>
+    </div>`,
   correctTemplate: '<div class="correct"></div>',
   incorrectTemplate: '<div class="incorrect"></div>',
+  buttonTemplate: '<div class="btn-play__mode-repeat"></div>',
+  modalWindowTemplate: `
+    <div class="modal-container">
+      <div class="modal-background">
+        <div class="modal">
+          <h2 class="modal__description">{key}</h2>
+          <p class="modal__context"></p>
+        </div>
+      </div>
+    </div>
+  `,
+  audioEffects: [
+    { correct: 'correct' },
+    { error: 'error' },
+    { success: 'success' },
+    { failure: 'failure' },
+  ],
   categories: {
     action: [
       {
