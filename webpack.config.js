@@ -59,9 +59,6 @@ module.exports = (env, options) => {
     },
     plugins: [
       new CleanWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        filename: '[name].css',
-      }),
       new HtmlWebpackPlugin({
         template: 'index.html',
         chunks: ['index'],
@@ -81,6 +78,9 @@ module.exports = (env, options) => {
         { from: 'src/assets/media', to: 'src/assets/media' },
         { from: 'src/assets/svg', to: 'src/assets/svg' },
       ]),
+      new MiniCssExtractPlugin({
+        filename: './[name].css',
+      }),
     ],
   };
 

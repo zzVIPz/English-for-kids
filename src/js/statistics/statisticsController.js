@@ -5,7 +5,7 @@ class statisticsController extends MainController {
     super();
     this.model = model;
     this.view = view;
-    this.statistics = JSON.parse(localStorage.statistics);
+    this.statistics = [];
     this.table = document.querySelector('.table');
     this.state = 0;
     this.btnReset = document.querySelector('.btn-reset');
@@ -13,10 +13,13 @@ class statisticsController extends MainController {
   }
 
   init() {
+    if (localStorage.statistics) {
+      this.statistics = JSON.parse(localStorage.statistics);
+    }
     this.setName();
     this.addErrorRateData();
-    this.addListeners();
     this.renderTemplate();
+    this.addListeners();
   }
 
   addErrorRateData() {
