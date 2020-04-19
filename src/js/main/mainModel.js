@@ -264,8 +264,74 @@ const MAIN_MODEL = {
         translation: 'смех',
       },
     ],
-    t: {},
-    y: {},
+    t: [
+      {
+        word: 'sad',
+        translation: 'грустный',
+      },
+      {
+        word: 'angry',
+        translation: 'сердитый',
+      },
+      {
+        word: 'happy',
+        translation: 'счастливый',
+      },
+      {
+        word: 'tired',
+        translation: 'уставший',
+      },
+      {
+        word: 'surprised',
+        translation: 'удивлённый',
+      },
+      {
+        word: 'scared',
+        translation: 'испуганный',
+      },
+      {
+        word: 'smile',
+        translation: 'улыбка',
+      },
+      {
+        word: 'laugh',
+        translation: 'смех',
+      },
+    ],
+    y: [
+      {
+        word: 'sad',
+        translation: 'грустный',
+      },
+      {
+        word: 'angry',
+        translation: 'сердитый',
+      },
+      {
+        word: 'happy',
+        translation: 'счастливый',
+      },
+      {
+        word: 'tired',
+        translation: 'уставший',
+      },
+      {
+        word: 'surprised',
+        translation: 'удивлённый',
+      },
+      {
+        word: 'scared',
+        translation: 'испуганный',
+      },
+      {
+        word: 'smile',
+        translation: 'улыбка',
+      },
+      {
+        word: 'laugh',
+        translation: 'смех',
+      },
+    ],
   },
 };
 

@@ -14,6 +14,7 @@ module.exports = (env, options) => {
     entry: {
       index: ['./src/index.js', './src/sass/style.scss'],
       main: ['./src/pages/main.js', './src/sass/main.scss'],
+      statistics: ['./src/pages/statistics.js', './src/sass/statistics.scss'],
     },
     output: {
       path: path.join(__dirname, '/dist'),
@@ -70,9 +71,15 @@ module.exports = (env, options) => {
         template: 'src/pages/main.html',
         chunks: ['main'],
       }),
+      new HtmlWebpackPlugin({
+        filename: 'pages/statistics.html',
+        template: 'src/pages/statistics.html',
+        chunks: ['statistics'],
+      }),
       new CopyPlugin([
         { from: 'src/assets/images', to: 'src/assets/images' },
         { from: 'src/assets/media', to: 'src/assets/media' },
+        { from: 'src/assets/svg', to: 'src/assets/svg' },
       ]),
     ],
   };

@@ -6,17 +6,20 @@ class MainView {
     this.template = null;
   }
 
-  init(model) {
-    this.createNavigationMenu(model.linkNavigationTemplate, Object.keys(model.categories));
+  init(model, name) {
+    this.createNavigationMenu(model.linkNavigationTemplate, Object.keys(model.categories), name);
   }
 
-  createNavigationMenu(template, links) {
+  createNavigationMenu(template, links, name) {
     links.unshift('main page');
     links.push('statistics');
     links.forEach((link) => {
       const correctTemplate = this.getCorrectTemplate(true, template, link, link);
       this.navigationMenu.innerHTML += correctTemplate;
     });
+    document
+      .querySelector('[data-name="statistics"]')
+      .setAttribute('href', `./statistics.html#name=${name}`);
   }
 
   createCategoryCard(template, word, translation) {
@@ -54,10 +57,10 @@ class MainView {
       if (trueDescription) trueDescription = trueDescription.toUpperCase();
       if (trueText) trueText = trueText.toUpperCase();
     }
-    if (key) {
+    if (key || key === 0) {
       this.template = this.template.replace(/\{key\}/g, trueKey);
     }
-    if (description) {
+    if (description || description === 0) {
       this.template = this.template.replace(/\{description\}/g, trueDescription);
     }
     if (text) {

@@ -11,7 +11,7 @@ class MainController {
     this.headerNavigation = document.querySelector('.header__navigation');
     this.navigation = document.querySelector('.navigation');
     this.width = document.body.style.width;
-    this.categories = Object.keys(this.model.categories);
+    this.categories = null;
     this.container = document.querySelector('.container-cards');
     this.categoriesContainer = document.querySelector('.container-categories');
     this.toggle = document.querySelector('#toggle');
@@ -25,6 +25,7 @@ class MainController {
     this.keys = null;
     this.key = null;
     this.mistakes = 0;
+    this.statistics = [];
   }
 
   init() {
@@ -32,20 +33,17 @@ class MainController {
     this.renderTemplate();
     this.addListeners();
     this.createAudioEffectsList();
+    this.initializationStorageOfStatistics();
   }
 
   setName() {
     this.name = localStorage.name || 'English for kids';
-    document.querySelector('.header__title').innerText = this.name;
   }
 
   renderTemplate() {
-    // if (!document.location.hash.includes(this.name)) {
-    //   this.setLocationHash();
-    // }
-    this.view.init(this.model);
-    // const mainPage = this.navigation.querySelector('.navigation__link');
-    // mainPage.setAttribute('href', `#main page%name=${this.name}`);
+    this.view.init(this.model, this.name);
+    document.querySelector('.header__title').innerText = this.name;
+    this.categories = Object.keys(this.model.categories);
     this.categories.forEach((key) => {
       this.view.createCard(this.model.template, key);
     });
@@ -57,13 +55,33 @@ class MainController {
     this.addCardsActionHandler();
     this.addBurgerMenuClickHandler();
     this.addOverlayPressHandler();
-    // this.addNavigationMenuMouseEnterHandler();
-    // this.addCardClickHandler();
     this.addToggleClickHandler();
     this.addCategoryCardClickHandler();
     this.addNavigationLinkClickHandler();
     this.addHashChangeHandler();
     this.addButtonStartClickHandler();
+  }
+
+  initializationStorageOfStatistics() {
+    if (localStorage.statistics) {
+      this.statistics = JSON.parse(localStorage.statistics);
+    }
+    if (!this.statistics.length) {
+      Object.keys(this.model.categories).forEach((category) => {
+        this.model.categories[category].forEach((item) => {
+          const element = {
+            word: item.word,
+            translation: item.translation,
+            category,
+            trainClick: 0,
+            playCorrectClick: 0,
+            playErrorClick: 0,
+          };
+          this.statistics.push(element);
+        });
+      });
+    }
+    console.log('st', this.statistics);
   }
 
   createAudioEffectsList() {
@@ -103,26 +121,19 @@ class MainController {
         mouseY: 0,
         mouseLeaveDelay: null,
       };
-
       node.addEventListener('mouseenter', () => {
         clearTimeout(state.mouseLeaveDelay);
       });
-
       node.addEventListener('mousemove', (event) => {
         state.mouseX = event.pageX - node.offsetLeft - state.width / 2;
         state.mouseY = event.pageY - node.offsetTop - state.height / 2;
-
-        // parallax angle in card
         const angleX = (state.mouseX / state.width) * 30;
         const angleY = (state.mouseY / state.height) * -30;
         card.style.transform = `rotateY(${angleX}deg) rotateX(${angleY}deg) `;
-
-        // parallax position of background in card
         const posX = (state.mouseX / state.width) * -40;
         const posY = (state.mouseY / state.height) * -40;
         cardBg.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
       });
-
       node.addEventListener('mouseleave', () => {
         state.mouseLeaveDelay = setTimeout(() => {
           card.style.transform = 'rotateY(0deg) rotateX(0deg) ';
@@ -169,17 +180,14 @@ class MainController {
   }
 
   setActiveLink() {
-    // const hash = this.getHashOfPage();
     let checkState = null;
     this.links.forEach((link) => {
-      console.log(this.links);
       link.classList.remove('navigation__link--active');
       if (link.dataset.name === this.hash) {
         link.classList.add('navigation__link--active');
         checkState += 1;
       }
     });
-    //todo check will there correct state?
     if (!checkState) {
       this.links[0].classList.add('navigation__link--active');
     }
@@ -197,18 +205,9 @@ class MainController {
   }
 
   addNavigationLinkClickHandler() {
-    // this.navigation.addEventListener('click', (event) => {
-    //   const categoryName = event.target.dataset.name;
-    //   if (categoryName) {
-    //     this.renderSectionOfCategory(categoryName);
-    //     this.toggleMenuProperty();
-    //   }
-    // });
-
     this.navigation.addEventListener('click', (event) => {
       const categoryName = event.target.dataset.name;
       if (categoryName) {
-        // this.renderSectionOfCategory(categoryName);
         this.toggleMenuProperty();
       }
     });
@@ -216,7 +215,6 @@ class MainController {
 
   addHashChangeHandler() {
     window.addEventListener('hashchange', () => {
-      // const hash = this.getHashOfPage();
       this.getHashOfPage();
       this.renderSectionOfCategory(this.hash);
       if (this.mode) {
@@ -225,6 +223,10 @@ class MainController {
         this.setButtonStartGameState();
       }
     });
+  }
+
+  setStatisticsToLocalStorage() {
+    localStorage.statistics = JSON.stringify(this.statistics);
   }
 
   getAudio(key) {
@@ -237,7 +239,10 @@ class MainController {
       const card = event.target.closest('.category-card');
       if (card) {
         // todo: think about create object with instance of audio
-        const audio = this.getAudio(card.dataset.name);
+        const dataName = card.dataset.name;
+        this.addValueToStatistics(dataName, 'trainClick');
+        this.setStatisticsToLocalStorage();
+        const audio = this.getAudio(dataName);
         audio.play();
       }
     };
@@ -289,6 +294,8 @@ class MainController {
       if (card && this.state) {
         const dataName = card.firstElementChild.dataset.name;
         if (dataName === this.key) {
+          this.addValueToStatistics(dataName, 'playCorrectClick');
+          this.setStatisticsToLocalStorage();
           this.audioEffectsList.correct.play();
           const container = document.querySelector(
             `[data-name="${this.key}"] .category-card__container`,
@@ -318,6 +325,8 @@ class MainController {
             this.setDefaultPlayModeState();
           }
         } else {
+          this.addValueToStatistics(dataName, 'playErrorClick');
+          this.setStatisticsToLocalStorage();
           this.audioEffectsList.error.play();
           const container = document.querySelector(
             `[data-name="${dataName}"] .category-card__container`,
@@ -328,6 +337,15 @@ class MainController {
       }
     };
     this.categoriesContainer.addEventListener('click', this.checkAnswer);
+  }
+
+  addValueToStatistics(dataName, key) {
+    this.statistics.forEach((el) => {
+      if (el.word === dataName) {
+        const property = el;
+        property[key] += 1;
+      }
+    });
   }
 
   showModal(data, template) {
@@ -352,7 +370,6 @@ class MainController {
 
   addButtonStartClickHandler() {
     this.button.addEventListener('click', () => {
-      console.log('click', this.playlist);
       this.button.innerHTML = this.model.buttonTemplate;
       this.button.classList.add('btn-play--enabled');
       this.state = 1;
