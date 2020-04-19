@@ -6,9 +6,9 @@ class statisticsController extends MainController {
     this.model = model;
     this.view = view;
     this.statistics = JSON.parse(localStorage.statistics);
-    this.sortStatistics = null;
     this.table = document.querySelector('.table');
     this.state = 0;
+    this.btnReset = document.querySelector('.btn-reset');
   }
 
   init() {
@@ -34,6 +34,7 @@ class statisticsController extends MainController {
 
   addListeners() {
     this.buttonArrowsClickHandler();
+    this.buttonResetClickHandler();
   }
 
   buttonArrowsClickHandler() {
@@ -84,15 +85,29 @@ class statisticsController extends MainController {
   sortBySelectedValue(data, key, mode) {
     let temporaryData = [...data];
     if (mode === 'straight') {
-      temporaryData = temporaryData.sort((a, b) => (a[key] > b[key] ? 1 : -1));
+      temporaryData = temporaryData.sort((a, b) => (a[key] > b[key] ? -1 : 1));
     }
     if (mode === 'back') {
-      temporaryData = temporaryData.sort((a, b) => (a[key] > b[key] ? -1 : 1));
+      temporaryData = temporaryData.sort((a, b) => (a[key] > b[key] ? 1 : -1));
     }
     if (mode === 'default') {
       temporaryData = data;
     }
     this.view.createTableData(this.model.tdTemplate, temporaryData);
+  }
+
+  buttonResetClickHandler() {
+    this.btnReset.addEventListener('click', () => {
+      this.statistics.forEach((element) => {
+        const item = element;
+        item.errorRate = 0;
+        item.playCorrectClick = 0;
+        item.playErrorClick = 0;
+        item.trainClick = 0;
+      });
+      this.view.createTableData(this.model.tdTemplate, this.statistics);
+      this.setStatisticsToLocalStorage();
+    });
   }
 }
 

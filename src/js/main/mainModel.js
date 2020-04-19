@@ -7,7 +7,7 @@ const MAIN_MODEL = {
     <a href="#{key}">
       <div class="card__wrapper">
         <div class="card {key}">
-          <div class="card-bg"></div>
+          <div class="card-bg" style='background-image: url("../src/assets/images/{text}.jpg")'></div>
           <div class="card-info">
             <h3 class="card__title">{description}</h3>
             <p class="card__description"></p>
@@ -58,10 +58,10 @@ const MAIN_MODEL = {
     { failure: 'failure' },
   ],
   categories: {
-    action: [
+    amusements: [
       {
-        word: 'cry',
-        translation: 'плакать',
+        word: 'ride',
+        translation: 'ездить',
       },
       {
         word: 'dance',
@@ -84,16 +84,15 @@ const MAIN_MODEL = {
         translation: 'летать',
       },
       {
-        word: 'hug',
-        translation: 'обнимать',
+        word: 'run',
+        translation: 'бегать',
       },
       {
         word: 'jump',
         translation: 'прыгать',
       },
     ],
-
-    verbs: [
+    actions: [
       {
         word: 'open',
         translation: 'открывать',
@@ -107,12 +106,12 @@ const MAIN_MODEL = {
         translation: 'указывать',
       },
       {
-        word: 'ride',
-        translation: 'ездить',
+        word: 'cry',
+        translation: 'плакать',
       },
       {
-        word: 'run',
-        translation: 'бегать',
+        word: 'hug',
+        translation: 'обнимать',
       },
       {
         word: 'sing',
@@ -127,7 +126,7 @@ const MAIN_MODEL = {
         translation: 'плавать',
       },
     ],
-    animals: [
+    pets: [
       {
         word: 'cat',
         translation: 'кот',
@@ -161,15 +160,14 @@ const MAIN_MODEL = {
         translation: 'овца',
       },
     ],
-
-    animals2: [
+    animals: [
       {
         word: 'bird',
         translation: 'птица',
       },
       {
-        word: 'fish',
-        translation: 'рыба',
+        word: 'wolf',
+        translation: 'волк',
       },
       {
         word: 'frog',
@@ -264,72 +262,72 @@ const MAIN_MODEL = {
         translation: 'смех',
       },
     ],
-    t: [
+    furniture: [
       {
-        word: 'sad',
-        translation: 'грустный',
+        word: 'bed',
+        translation: 'кровать',
       },
       {
-        word: 'angry',
-        translation: 'сердитый',
+        word: 'cupboard',
+        translation: 'шкаф',
       },
       {
-        word: 'happy',
-        translation: 'счастливый',
+        word: 'ottoman',
+        translation: 'тахта',
       },
       {
-        word: 'tired',
-        translation: 'уставший',
+        word: 'armchair',
+        translation: 'кресло',
       },
       {
-        word: 'surprised',
-        translation: 'удивлённый',
+        word: 'table',
+        translation: 'стол',
       },
       {
-        word: 'scared',
-        translation: 'испуганный',
+        word: 'nightstand',
+        translation: 'тумбочка',
       },
       {
-        word: 'smile',
-        translation: 'улыбка',
+        word: 'sofa',
+        translation: 'диван',
       },
       {
-        word: 'laugh',
-        translation: 'смех',
+        word: 'chair',
+        translation: 'стул',
       },
     ],
-    y: [
+    schoolbag: [
       {
-        word: 'sad',
-        translation: 'грустный',
+        word: 'pen',
+        translation: 'ручка',
       },
       {
-        word: 'angry',
-        translation: 'сердитый',
+        word: 'pencil',
+        translation: 'карандаш',
       },
       {
-        word: 'happy',
-        translation: 'счастливый',
+        word: 'ruler',
+        translation: 'линейка',
       },
       {
-        word: 'tired',
-        translation: 'уставший',
+        word: 'notebook',
+        translation: 'тетрадь',
       },
       {
-        word: 'surprised',
-        translation: 'удивлённый',
+        word: 'eraser',
+        translation: 'ластик',
       },
       {
-        word: 'scared',
-        translation: 'испуганный',
+        word: 'book',
+        translation: 'книга',
       },
       {
-        word: 'smile',
-        translation: 'улыбка',
+        word: 'scissors',
+        translation: 'ножницы',
       },
       {
-        word: 'laugh',
-        translation: 'смех',
+        word: 'paper',
+        translation: 'бумага',
       },
     ],
   },

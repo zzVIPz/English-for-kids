@@ -7,6 +7,7 @@ class Controller {
 
   init() {
     this.input = document.querySelector('.login__input');
+    this.input.value = '';
     this.link = document.querySelector('.btnflip');
     this.addListener();
   }
@@ -20,9 +21,6 @@ class Controller {
     if (this.userName) {
       this.setNameToLocalStorage();
       this.setLink(this.userName);
-
-      // todo: how change value with delay?
-      this.input.value = '';
     } else {
       this.input.classList.add('login__input-invalid');
       this.input.focus();

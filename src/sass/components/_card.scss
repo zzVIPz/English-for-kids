@@ -19,11 +19,11 @@ body {
 }
 
 .card__title {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .card__wrapper {
-  margin: 10px;
+  margin: 20px;
 
   transform: perspective(800px);
   transform-style: preserve-3d;
@@ -86,7 +86,6 @@ body {
   height: 100%;
   padding: 20px;
 
-  background-image: url("../assets/images/sveta.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

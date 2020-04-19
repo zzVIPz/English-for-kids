@@ -39,7 +39,7 @@ class statisticsView extends MainView {
     }
     data.forEach((element) => {
       this.createTableRow();
-      Object.keys(element).forEach((property) => {
+      Object.keys(element).forEach((property, index) => {
         const correctTemplate = this.getCorrectTemplate(false, tdTemplate, element[property]);
         this.row.innerHTML += correctTemplate;
       });

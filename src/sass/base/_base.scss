@@ -8,15 +8,13 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
-  @extend %font-prim;
+  background-image: linear-gradient(to top, #feada6 0%, #f5efef 100%);
 
-  // @include font($size: 1.6rem, $height: 2.6rem, $weight: normal);
+  @extend %font-prim;
 }
 
 h1 {
   text-align: center;
-
-  // @include font($size: 2.5rem, $height: 3.5rem);
 }
 
 .overflow-hidden {
@@ -25,6 +23,7 @@ h1 {
 
 .main {
   min-height: 100vh;
+  padding-top: 30px;
 }
 
 .container {
@@ -34,6 +33,7 @@ h1 {
   align-items: center;
   max-width: 1500px;
   margin: auto;
+  padding-top: 20px;
   &--hidden {
     display: none;
   }

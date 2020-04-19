@@ -45,7 +45,8 @@ class MainController {
     document.querySelector('.header__title').innerText = this.name;
     this.categories = Object.keys(this.model.categories);
     this.categories.forEach((key) => {
-      this.view.createCard(this.model.template, key);
+      const number = this.getRandomIntInclusive(0, 7);
+      this.view.createCard(this.model.template, key, this.model.categories[key][number].word);
     });
     this.links = document.querySelectorAll('.navigation__link');
     this.setLocationHash();
@@ -420,6 +421,12 @@ class MainController {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+  }
+
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
 

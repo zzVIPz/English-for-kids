@@ -13,6 +13,7 @@ class MainView {
   createNavigationMenu(template, links, name) {
     links.unshift('main page');
     links.push('statistics');
+    links.push('log out');
     links.forEach((link) => {
       const correctTemplate = this.getCorrectTemplate(true, template, link, link);
       this.navigationMenu.innerHTML += correctTemplate;
@@ -20,6 +21,7 @@ class MainView {
     document
       .querySelector('[data-name="statistics"]')
       .setAttribute('href', `./statistics.html#name=${name}`);
+    document.querySelector('[data-name="log-out"]').setAttribute('href', '../index.html');
   }
 
   createCategoryCard(template, word, translation) {
@@ -27,8 +29,9 @@ class MainView {
     this.categoriesContainer.innerHTML += correctTemplate;
   }
 
-  createCard(template, key) {
-    const correctTemplate = this.getCorrectTemplate(true, template, key, key);
+  createCard(template, key, text) {
+    console.log('image', text);
+    const correctTemplate = this.getCorrectTemplate(true, template, key, key, null, text);
     this.cardsContainer.innerHTML += correctTemplate;
   }
 
@@ -47,7 +50,7 @@ class MainView {
     this.categoriesContainer.innerHTML += correctTemplate;
   }
 
-  getCorrectTemplate(flag, template, key, description, text) {
+  getCorrectTemplate(flag, template, key, description, text, name) {
     this.template = template;
     let trueKey = key;
     let trueDescription = description;
@@ -65,6 +68,9 @@ class MainView {
     }
     if (text) {
       this.template = this.template.replace(/\{text\}/g, trueText);
+    }
+    if (name) {
+      this.template = this.template.replace(/\{text\}/g, name);
     }
     return this.template;
   }

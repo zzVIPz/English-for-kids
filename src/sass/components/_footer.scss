@@ -4,13 +4,13 @@
 
   height: 47px;
 
-  background-color: #ff9295;
+  background-color: $color-menu-train;
 
   &__play {
-    background-color: #6fc57c;
+    background-color: $color-menu-play;
     .toggle {
       &:before {
-        color: rgba(62, 160, 81, 0.89);
+        color: rgba(44, 58, 46, 0.71);
       }
       &:after {
         color: #ffffff;
@@ -32,7 +32,7 @@
     font-size: 1.8rem;
     color: #ffffff;
 
-    background-color: #b0dbb6;
+    background-color: #ceb0db;
     border: none;
     border-radius: 5px;
     outline: none;

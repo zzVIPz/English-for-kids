@@ -34,3 +34,17 @@
     cursor: pointer;
   }
 }
+
+thead tr:first-child th {
+  position: sticky;
+  top: 0;
+
+  background-color: cadetblue;
+}
+
+// tbody td:first-child {
+//   position: sticky;
+//   left: 0;
+
+//   background-color: white;
+// }
