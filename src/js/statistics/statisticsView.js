@@ -11,7 +11,6 @@ class statisticsView extends MainView {
   }
 
   init(model, data) {
-    console.log(data);
     this.createStatisticsSection(model, data);
   }
 
@@ -39,7 +38,7 @@ class statisticsView extends MainView {
     }
     data.forEach((element) => {
       this.createTableRow();
-      Object.keys(element).forEach((property, index) => {
+      Object.keys(element).forEach((property) => {
         const correctTemplate = this.getCorrectTemplate(false, tdTemplate, element[property]);
         this.row.innerHTML += correctTemplate;
       });

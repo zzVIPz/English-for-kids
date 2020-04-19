@@ -9,6 +9,7 @@ class statisticsController extends MainController {
     this.table = document.querySelector('.table');
     this.state = 0;
     this.btnReset = document.querySelector('.btn-reset');
+    this.btnRepeat = document.querySelector('.btn-repeat');
   }
 
   init() {
@@ -35,6 +36,7 @@ class statisticsController extends MainController {
   addListeners() {
     this.buttonArrowsClickHandler();
     this.buttonResetClickHandler();
+    this.buttonRepeatClickHandler();
   }
 
   buttonArrowsClickHandler() {
@@ -107,6 +109,20 @@ class statisticsController extends MainController {
       });
       this.view.createTableData(this.model.tdTemplate, this.statistics);
       this.setStatisticsToLocalStorage();
+    });
+  }
+
+  buttonRepeatClickHandler() {
+    this.btnRepeat.addEventListener('click', () => {
+      // todo need to finish
+      // const newCategory = [];
+      // for (let i = 0; i < 8; i += 1) {
+      //   newCategory.push(this.statistics[i]);
+      // }
+      // console.log(newCategory);
+      // newCategory.forEach((item) => {
+      //   this.view.createCategoryCard(this.model.categoriesTemplate, item.word, item.translation);
+      // });
     });
   }
 }

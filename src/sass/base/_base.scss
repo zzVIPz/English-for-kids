@@ -23,7 +23,16 @@ h1 {
 
 .main {
   min-height: 100vh;
-  padding-top: 30px;
+  padding: 10px;
+}
+
+.main__description {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.buttons-wrapper {
+  padding: 10px 0;
 }
 
 .container {

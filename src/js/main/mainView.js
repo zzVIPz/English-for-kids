@@ -30,7 +30,6 @@ class MainView {
   }
 
   createCard(template, key, text) {
-    console.log('image', text);
     const correctTemplate = this.getCorrectTemplate(true, template, key, key, null, text);
     this.cardsContainer.innerHTML += correctTemplate;
   }

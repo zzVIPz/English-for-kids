@@ -82,7 +82,6 @@ class MainController {
         });
       });
     }
-    console.log('st', this.statistics);
   }
 
   createAudioEffectsList() {
@@ -163,21 +162,8 @@ class MainController {
   toggleMenuProperty() {
     document.body.classList.toggle('overflow-hidden');
     this.burgerMenu.classList.toggle('burger-menu-active');
-    // this.header.classList.toggle('header-active');
     this.headerNavigation.classList.toggle('header__navigation-active');
     this.navigation.classList.toggle('navigation-active');
-    // if (node && node.classList.contains('navigation-link')) {
-    //   headerNavigation.classList.toggle('header-navigation-active');
-    // } else {
-    //   if (headerNavigation.classList.contains('header-navigation-active')) {
-    //     setTimeout(() => {
-    //       headerNavigation.classList.toggle('header-navigation-active');
-    //     }, 150);
-    //   } else {
-    //     headerNavigation.classList.add('header-navigation-active');
-    //   }
-    // }
-    // document.body.style.width = 'auto';
   }
 
   setActiveLink() {
@@ -407,8 +393,6 @@ class MainController {
     // todo: think about delete object.keys
     this.keys = Object.keys(this.playlist);
     const cnt = this.counter;
-    console.log('cnt', cnt);
-    console.log('this.playlist', this.playlist);
     this.key = this.keys[cnt];
     setTimeout(() => {
       this.playlist[this.keys[cnt]].play();
