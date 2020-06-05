@@ -1,0 +1,56 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+
+  height: 47px;
+
+  background-color: $color-menu-train;
+
+  &__play {
+    background-color: $color-menu-play;
+    .toggle {
+      &:before {
+        color: rgba(44, 58, 46, 0.71);
+      }
+      &:after {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .btn-play {
+    position: absolute;
+    top: 4px;
+    left: 68px;
+    z-index: 2;
+
+    display: none;
+    justify-content: center;
+    width: 80px;
+    height: 33px;
+
+    font-size: 1.8rem;
+    color: #ffffff;
+
+    background-color: #ceb0db;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+
+    &--active {
+      display: flex;
+    }
+
+    &--enabled {
+      border-radius: 50%;
+    }
+
+    &__mode-repeat {
+      width: 30px;
+      height: 30px;
+
+      background: url("../assets/svg/repeat.svg") center/30px no-repeat;
+    }
+  }
+}

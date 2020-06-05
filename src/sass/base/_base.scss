@@ -1,0 +1,49 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  display: -webkit-flex;
+  display:         flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  background-image: linear-gradient(to top, #feada6 0%, #f5efef 100%);
+
+  @extend %font-prim;
+}
+
+h1 {
+  text-align: center;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 10px;
+}
+
+.main__description {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.buttons-wrapper {
+  padding: 10px 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1500px;
+  margin: auto;
+  padding-top: 20px;
+  &--hidden {
+    display: none;
+  }
+}
